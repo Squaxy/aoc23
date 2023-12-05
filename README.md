@@ -7,7 +7,7 @@ advent of code 2023
 ## Task 2
     - no problems at all
 ## Task 3
-    - 
-
+    - verstehe schon wieder nicht was geht, kann leider nicht mehr debuggen
 ## Task 4
+    - part 1 ziemlich leicht
 ## Task 5
