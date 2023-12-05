@@ -10,4 +10,5 @@ advent of code 2023
     - verstehe schon wieder nicht was geht, kann leider nicht mehr debuggen
 ## Task 4
     - part 1 ziemlich leicht
+    - part 2 klingt ziemlich nach einem rekursions problem
 ## Task 5
