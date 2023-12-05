@@ -1,1 +1,0 @@
-cargo new --vcs=none Task_%1
