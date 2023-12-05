@@ -29,7 +29,7 @@ fn main() {
     // recursive method for cards altering given reference?
     // google recursion for rust
 
-    println!("{}", sum);
+    println!("a");
 }
 
 fn create_card(line: &str) -> Card {
