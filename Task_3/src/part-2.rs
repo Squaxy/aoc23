@@ -1,8 +1,9 @@
-use std::fs::*;
+use std::{fs::*, collections::HashMap};
 
-const NON_SYMBOLS: &str = "0123456789.";
 const DIGITS: &str = "0123456789";
+const GEAR_SYMBOL: &str = "*";
 
+#[derive(PartialEq, Eq, Hash)]
 struct Gear {
     number: String,
     x: usize,
@@ -10,8 +11,31 @@ struct Gear {
     len: usize,
 }
 
+impl Gear {
+    fn get_clone(&self) -> Gear {
+        return Gear {
+            number: self.number.clone(),
+            x: self.x.clone(),
+            y: self.y.clone(),
+            len: self.len.clone(),
+        };
+    }
+}
+
+struct NewGear {
+    n1: String,
+    n2: String,
+    x: usize,
+    y: usize,
+    len: usize,
+}
+
+impl NewGear {
+    
+}
+
 fn main() {
-    let input = read_to_string("./res/input.txt").unwrap();
+    let input = read_to_string("./res/input2.txt").unwrap();
     let lines: Vec<&str> = input.split("\n").collect();
     let mut gear_numbers = Vec::<Gear>::new();
     let mut symbol_indices = Vec::<[usize; 2]>::new();
@@ -23,7 +47,7 @@ fn main() {
 
     let mut actual_gear_values = Vec::<i32>::new();
 
-    iterate_gears(&gear_numbers, &symbol_indices, &mut actual_gear_values, &max_index_x, &max_index_y);
+    let sum = iterate_gears(&gear_numbers, &symbol_indices, &mut actual_gear_values, &max_index_x, &max_index_y);
 
     // for el in &actual_gear_values {
     //     println!("{}", el)
@@ -31,40 +55,15 @@ fn main() {
     println!("all n cnt: {}", gear_numbers.len());
     println!("gear val cnt: {}", actual_gear_values.len());
 
-    println!("{}", actual_gear_values.iter().sum::<i32>());
+    println!("{}", sum);
 
-}
-
-fn iterate_gears_old(gear_numbers: &Vec<Gear>, symbol_indices: &Vec<[usize; 2]>, actual_gear_values: &mut Vec<i32>,
-    max_index_x: &usize, max_index_y: &usize) -> () {
-    
-    for gear in gear_numbers {
-        let mut proximity = Vec::<[usize; 2]>::new();
-        let x = gear.x as i32;
-        let y = gear.y as i32;
-        for i in x-1..(x+2) {
-            if i < 0 || i > *max_index_x as i32 {
-                continue;
-            }
-            for j in y-1..(y+gear.len as i32+1) {
-                if j < 0 || j > *max_index_y as i32{
-                    continue;
-                }
-                proximity.push([i as usize, j as usize]);
-            }
-        }
-        for neighbor in proximity {
-            if symbol_indices.contains(&neighbor) {
-                actual_gear_values.push(gear.number.parse::<i32>().unwrap());
-                break;
-            }
-        }
-    }
 }
 
 fn iterate_gears(gear_numbers: &Vec<Gear>, symbol_indices: &Vec<[usize; 2]>, actual_gear_values: &mut Vec<i32>,
-    max_index_x: &usize, max_index_y: &usize) {
+    max_index_x: &usize, max_index_y: &usize) -> i32 {
     
+    let mut gear_proximity_map = HashMap::<Gear, Vec<[usize; 2]>>::new(); 
+
     for gear in gear_numbers {
         let x = gear.x as i32;
         let y = gear.y as i32;
@@ -75,9 +74,31 @@ fn iterate_gears(gear_numbers: &Vec<Gear>, symbol_indices: &Vec<[usize; 2]>, act
             .collect();
 
         if proximity.iter().any(|&neighbor| symbol_indices.contains(&neighbor)) {
-            actual_gear_values.push(gear.number.parse().unwrap());
+            // actual_gear_values.push(gear.number.parse().unwrap());
+            gear_proximity_map.insert(gear.get_clone(), proximity);
         }
     }
+
+    let mut gear_sum = 0;
+    
+    for sym_i in symbol_indices {
+        let mut gears_in_proximity_to_symbol = Vec::<Gear>::new();
+        let mut gear_count = 0;
+        for gear_proxy_tuple in &gear_proximity_map {
+            if gear_proxy_tuple.1.contains(sym_i) {
+                gear_count += 1;
+                gears_in_proximity_to_symbol.push(gear_proxy_tuple.0.get_clone());
+            }
+        }
+        if gear_count == 2 {
+            gear_sum += gear_ratio(&gears_in_proximity_to_symbol.get(0).unwrap(), &gears_in_proximity_to_symbol.get(1).unwrap());
+        }
+    }
+    return gear_sum;
+}
+
+fn gear_ratio(g1: &Gear, g2: &Gear) -> i32 {
+    return g1.number.parse::<i32>().unwrap() * g2.number.parse::<i32>().unwrap();
 }
 
 fn iterate_lines(lines: Vec<&str>, gear_numbers: &mut Vec<Gear>, symbol_indices: &mut Vec<[usize; 2]>) -> () {
@@ -116,5 +137,5 @@ fn iterate_lines(lines: Vec<&str>, gear_numbers: &mut Vec<Gear>, symbol_indices:
 }
 
 fn is_symbol(c: &char) -> bool {
-    return !NON_SYMBOLS.contains(*c);
+    return GEAR_SYMBOL.contains(*c);
 }
