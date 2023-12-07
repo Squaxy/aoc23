@@ -8,6 +8,8 @@ advent of code 2023
     - no problems at all
 ## Task 3
     - verstehe schon wieder nicht was geht, kann leider nicht mehr debuggen
+    - chatgpt hat meine methode in part 1 nur rusty'er gemacht und plötzlich geht es, logikfehler war es also nicht.
+    - part2 nicht schön aber geht so, ich habe kein bock den compiler zu bekämpfen, darum die get_clone(). Vermutlich hätte man games mehr mit referenzen handlen sollen
 ## Task 4
     - part 1 ziemlich leicht
     - part 2 klingt ziemlich nach einem rekursions problem

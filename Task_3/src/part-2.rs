@@ -22,18 +22,6 @@ impl Gear {
     }
 }
 
-struct NewGear {
-    n1: String,
-    n2: String,
-    x: usize,
-    y: usize,
-    len: usize,
-}
-
-impl NewGear {
-    
-}
-
 fn main() {
     let input = read_to_string("./res/input2.txt").unwrap();
     let lines: Vec<&str> = input.split("\n").collect();
@@ -45,13 +33,10 @@ fn main() {
 
     iterate_lines(lines, &mut gear_numbers, &mut symbol_indices);
 
-    let mut actual_gear_values = Vec::<i32>::new();
+    let actual_gear_values = Vec::<i32>::new();
 
-    let sum = iterate_gears(&gear_numbers, &symbol_indices, &mut actual_gear_values, &max_index_x, &max_index_y);
+    let sum = iterate_gears(&gear_numbers, &symbol_indices, &max_index_x, &max_index_y);
 
-    // for el in &actual_gear_values {
-    //     println!("{}", el)
-    // }
     println!("all n cnt: {}", gear_numbers.len());
     println!("gear val cnt: {}", actual_gear_values.len());
 
@@ -59,8 +44,7 @@ fn main() {
 
 }
 
-fn iterate_gears(gear_numbers: &Vec<Gear>, symbol_indices: &Vec<[usize; 2]>, actual_gear_values: &mut Vec<i32>,
-    max_index_x: &usize, max_index_y: &usize) -> i32 {
+fn iterate_gears(gear_numbers: &Vec<Gear>, symbol_indices: &Vec<[usize; 2]>, max_index_x: &usize, max_index_y: &usize) -> i32 {
     
     let mut gear_proximity_map = HashMap::<Gear, Vec<[usize; 2]>>::new(); 
 
