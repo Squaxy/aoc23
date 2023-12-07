@@ -13,4 +13,6 @@ advent of code 2023
 ## Task 4
     - part 1 ziemlich leicht
     - part 2 klingt ziemlich nach einem rekursions problem
+    - puh habs geschafft. mit diesem get_clone() schonwieder, ich kam nicht drum herum diese wieder zu implementieren, aber richtig fühlt sich das nicht an
 ## Task 5
+    - 
