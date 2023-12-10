@@ -1,0 +1,4 @@
+functions:  
+  - use format! instead of concat. with strings
+    - works with &str and String
+  
