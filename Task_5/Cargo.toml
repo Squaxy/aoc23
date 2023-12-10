@@ -1,0 +1,11 @@
+[package]
+name = "Task_5"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "part-1"
+path = "src/part-1.rs"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
