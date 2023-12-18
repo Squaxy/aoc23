@@ -53,6 +53,8 @@ fn main() {
         gardeners_maps.push(gardeners_map);
     });
 
+    // now chain the maps and build a seeds to location map
+
     assert_eq!(gardeners_maps.len(), 7);
 }
 
