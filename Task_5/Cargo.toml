@@ -6,6 +6,10 @@ edition = "2021"
 [[bin]]
 name = "part-1"
 path = "src/part-1.rs"
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+bench = true
+# [[bin]]
+# name = "part-2"
+# path = "src/part-2.rs"
+
 
 [dependencies]
