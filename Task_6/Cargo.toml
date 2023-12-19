@@ -1,12 +1,11 @@
 [package]
-name = "Task_5"
+name = "Task_6"
 version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name = "part-2"
-path = "src/part-2.rs"
+name = "part-1"
+path = "src/part-1.rs"
 bench = true
-
 
 [dependencies]
