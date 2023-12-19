@@ -19,6 +19,8 @@ advent of code 2023
     - was geht ab, ram overflow
       - aber es kann eigentlich nicht an der recursion liegen, die wird ja für jeden seed reset
       - ist die seed to location map einfach zu groß?
+      - bessere Lösung wäre: seed ranges komplett zu propagieren. Wenn eine seed range nicht komplett in eine
+      gardenersentry range reinpasst, kann man die seed range in mehrere seed ranges splitten. hier auch wieder rekursiv? gib der aufgabe nochmal einen versuch!
 ## Task 6
     - ok das war viel zu einfach
     - auch part 2
