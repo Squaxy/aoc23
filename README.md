@@ -19,3 +19,7 @@ advent of code 2023
     - was geht ab, ram overflow
       - aber es kann eigentlich nicht an der recursion liegen, die wird ja für jeden seed reset
       - ist die seed to location map einfach zu groß?
+## Task 6
+    - ok das war viel zu einfach
+    - auch part 2
+    - map reduce zu satisfying, bin schon stolz das ich die zeile code mal eben in unter einer minute hingeknallt habe
