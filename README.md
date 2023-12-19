@@ -15,4 +15,7 @@ advent of code 2023
     - part 2 klingt ziemlich nach einem rekursions problem
     - puh habs geschafft. mit diesem get_clone() schonwieder, ich kam nicht drum herum diese wieder zu implementieren, aber richtig fühlt sich das nicht an
 ## Task 5
-    - 
+    - war eigentlich ganz ok
+    - was geht ab, ram overflow
+      - aber es kann eigentlich nicht an der recursion liegen, die wird ja für jeden seed reset
+      - ist die seed to location map einfach zu groß?
