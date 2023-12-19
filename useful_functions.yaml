@@ -1,4 +1,9 @@
 functions:  
   - use format! instead of concat. with strings
     - works with &str and String
-  
+  - result.unwrap_or(x) -> unwrapped oder wenn error nimmt es einfach den parameter.
+  - ok() returned Result to Option -> man kann dann match Some, None machen
+    - noch besser hier if let Some(val) = func_returning_Option() {expression} -> bei None wird einfach geskipped
+  - unwrap_or() gibts auch für options
+  - func(x)? -> das ? heisst: wenn func none returned, returne selber jetzt none!
+  - func(x).ok_or(OwnErrorStruct)? -> ok_or() mapped das returnte Option None von func zu einem result error den wir selber angeben können 
