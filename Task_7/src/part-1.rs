@@ -14,7 +14,8 @@ struct Hand {
 
 impl Ord for Hand {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        todo!();
+        // hier kommt der elbow grease
+        // verweise auf card cmp im falle das zwei hände sonst gleich sind
     }
 }
 
@@ -28,27 +29,29 @@ type Hands = Vec<Hand>;
 
 fn main() {
     let input: String = fs::read_to_string(INPUT_PATH).expect("Failed to read file!");
-    let lines: Vec<&str> = input.split("\n").collect();
+    let lines: Vec<&str> = input.lines().collect();
     
-    // example line: "557T5 626"
-    let hands: Hands = lines.iter().map(|line| {
-        let segments: Vec<&str> = line.split(" ").collect::<Vec<&str>>();
+    let mut hands: Hands = lines.iter().filter_map(|line| {
+        let segments: Vec<&str> = line.split_whitespace().collect();
 
-        let cards: Vec<Card> = segments.get(0).expect("someone had no hand :O")
+        let cards: Vec<Card> = segments.get(0)?
         .chars()
-        .map(|c| Card::from_str(&c.to_string()).expect("failed to parse the hand"))
-        .collect::<Vec<Card>>();
+        .filter_map(|c| Card::from_str(&c.to_string()).ok())
+        .collect();
 
-        let bid: u64 = segments.get(1)
-        .expect("someone had no bid :O")
-        .parse::<u64>()
-        .expect("couldnt convert bid str to u64");
+        let bid: u64 = segments.get(1)?.parse().ok()?;
 
-        Hand {
-            cards: cards,
-            bid: bid,
-        }
+        Some(Hand {cards, bid})
     }).collect();
 
-    println!("{:?}", hands);
+    // hands.sort();
+
+    println!("{:?}", accumulate_sorted_hands_ranks(&hands));
+}
+
+fn accumulate_sorted_hands_ranks(hands: &Hands) -> u128 {
+    hands.iter()
+        .enumerate()
+        .map(|(index, hand)| hand.bid as u128 * (index as u128 + 1))
+        .sum()
 }
