@@ -28,3 +28,5 @@ advent of code 2023
 ## Task 7
     - something feels off about part 1, the way of the solution is nice, but
     - the mutability and reference passing in the code feels weird
+    - part2 was interesting, realizing that some possibilities are not feasible, the flow of checking the highest value first and then breaking
+      - made it easier
