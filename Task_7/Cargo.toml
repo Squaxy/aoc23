@@ -1,0 +1,11 @@
+[package]
+name = "Task_7"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "part-1"
+path = "src/part-1.rs"
+bench = true
+
+[dependencies]
