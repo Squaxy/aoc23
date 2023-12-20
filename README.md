@@ -25,3 +25,6 @@ advent of code 2023
     - ok das war viel zu einfach
     - auch part 2
     - map reduce zu satisfying, bin schon stolz das ich die zeile code mal eben in unter einer minute hingeknallt habe
+## Task 7
+    - something feels off about part 1, the way of the solution is nice, but
+    - the mutability and reference passing in the code feels weird
