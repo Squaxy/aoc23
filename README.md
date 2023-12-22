@@ -30,3 +30,7 @@ advent of code 2023
     - the mutability and reference passing in the code feels weird
     - part2 was interesting, realizing that some possibilities are not feasible, the flow of checking the highest value first and then breaking
       - made it easier
+## Task 8
+    - wollte zuerst ein OOP ansatz wählen, aber ist doch völliger quatsch, wenns auch mal schnell geht
+    - part 2 giftig, ob ma wohl mit selber iterativer lösung zum ziel kommt. vermutlich läuft das programm ewig
+      - die lösung ist definitiv mit "kleinstem gemeinsamen teiler" zu lösen, aber hab kein bock mehr
