@@ -37,3 +37,5 @@ advent of code 2023
 ## Task 9
     - extrapolate_once had severe borrowing issues with simultan mut ref exisiting or immut and mut at the same time
     - very satisfiying, only extrapolate_once realy needed to be modified :D
+## Task 10
+    - 
