@@ -34,3 +34,6 @@ advent of code 2023
     - wollte zuerst ein OOP ansatz wählen, aber ist doch völliger quatsch, wenns auch mal schnell geht
     - part 2 giftig, ob ma wohl mit selber iterativer lösung zum ziel kommt. vermutlich läuft das programm ewig
       - die lösung ist definitiv mit "kleinstem gemeinsamen teiler" zu lösen, aber hab kein bock mehr
+## Task 9
+    - extrapolate_once had severe borrowing issues with simultan mut ref exisiting or immut and mut at the same time
+    - very satisfiying, only extrapolate_once realy needed to be modified :D

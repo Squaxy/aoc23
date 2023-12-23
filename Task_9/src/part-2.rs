@@ -35,7 +35,7 @@ fn extrapolate_values(array_of_numbers: &Vec<Vec<i32>>) -> Vec<i32> {
 fn extrapolate_value(numbers: &Vec<i32>) -> i32 {
     let mut array_of_numbers: Vec<Vec<i32>> = Vec::<Vec<i32>>::new();
     array_of_numbers.push(numbers.clone());
-    *extrapolate_value_recurse(&mut array_of_numbers).first().unwrap().last().unwrap()
+    *extrapolate_value_recurse(&mut array_of_numbers).first().unwrap().first().unwrap()
 }
 
 fn extrapolate_value_recurse(array_of_numbers: &mut Vec<Vec<i32>>) -> Vec<Vec<i32>>{
@@ -56,14 +56,12 @@ fn calculate_diff_sequence(sequence: &Vec<i32>) -> Vec<i32> {
 }
 
 fn extrapolate_once(array_of_numbers: &mut Vec<Vec<i32>>) -> Vec<Vec<i32>>{
-    array_of_numbers.last_mut().unwrap().push(0);
-
     for i in 1..array_of_numbers.len() {
         let clone = array_of_numbers.clone();
         let shallow_i = array_of_numbers.len()-1-i.clone();
-        let shallow = clone.get(shallow_i).unwrap().last().unwrap();
-        let deeper = clone.get(array_of_numbers.len()-i).unwrap().last().unwrap();
-        array_of_numbers.get_mut(shallow_i).unwrap().push(*shallow + *deeper);
+        let shallow = clone.get(shallow_i).unwrap().first().unwrap();
+        let deeper = clone.get(array_of_numbers.len()-i).unwrap().first().unwrap();
+        array_of_numbers.get_mut(shallow_i).unwrap().insert(0, *shallow - *deeper);
     }
 
     println!("interpolated: {:?}", array_of_numbers.clone());
