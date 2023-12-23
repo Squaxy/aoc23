@@ -17,6 +17,8 @@ const _TEST_INPUT_COMPLEX: &str = "\
 fn main() {
     let input: String = fs::read_to_string(INPUT_PATH).expect("Failed to read file!");
     let lines: Vec<&str> = input.lines().collect();
+    let maze = Maze::new(&lines);
 
-    println!("Sum of the interpolated values is -> {}", 6);
+    println!("{:?}", maze.get(0,0));
+
 }
