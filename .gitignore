@@ -1,3 +1,5 @@
 target/
 */target/*
 */target/**
+/Task_11_netbeans/Task_11/nbproject/private/
+/Task_11_netbeans/Task_11/build/

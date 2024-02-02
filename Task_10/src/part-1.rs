@@ -19,6 +19,7 @@ fn main() {
     let lines: Vec<&str> = input.lines().collect();
     let maze = Maze::new(&lines);
 
-    println!("{:?}", maze.get(0,0));
+    // have a step function that iterates with backtracking
+    println!("{:?}", maze);
 
 }
