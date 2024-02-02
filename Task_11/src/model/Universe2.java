@@ -2,18 +2,24 @@ package model;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class Universe implements IUniverse {
+public class Universe2 implements IUniverse {
 
     private final static Character GALAXY_CHAR = '#';
     private final static Character EMPTY_CHAR = '.';
 
+    private final static long EXPANSION_FACTOR = 1_000_000;
+
     List<List<Character>> rows;
     List<int[]> galaxies;
+
+    Set<Integer> noGalaxyRowIdx;
+    Set<Integer> noGalaxyColIdx;
     boolean expanded;
 
 
-    public Universe(List<String> input) {
+    public Universe2(List<String> input) {
         this.rows = new ArrayList<>();
         for (String s: input) {
             this.rows.add(s.chars().mapToObj(e -> (char) e).collect(Collectors.toList()));
@@ -24,8 +30,8 @@ public class Universe implements IUniverse {
 
     public void expand() {
         if (!expanded) {
-            duplicateRows();
-            duplicateCols();
+            findRowIdxToDuplicate();
+            findColIdxToDuplicate();
             accumulateGalaxyIndicies();
             this.expanded = true;
         }
@@ -42,8 +48,8 @@ public class Universe implements IUniverse {
         }
     }
 
-    private Set<Integer> findRowIdxToDuplicate() {
-        Set<Integer> noGalaxyRowIdx = new HashSet<>();
+    private void findRowIdxToDuplicate() {
+        this.noGalaxyRowIdx = new HashSet<>();
 
         for (int i = 0; i < rows.size(); i++) {
             if (rows.get(i).get(0).equals(EMPTY_CHAR)) {
@@ -58,11 +64,10 @@ public class Universe implements IUniverse {
                 }
             }
         }
-        return noGalaxyRowIdx;
     }
 
-    private Set<Integer> findColIdxToDuplicate() {
-        Set<Integer> noGalaxyColIdx = new HashSet<>();
+    private void findColIdxToDuplicate() {
+        this.noGalaxyColIdx = new HashSet<>();
         for (int i = 0; i < rows.size(); i++) {
             if (i == 0) {
                 for (int j = 0; j < rows.get(0).size(); j++) {
@@ -78,11 +83,10 @@ public class Universe implements IUniverse {
                 }
             }
         }
-        return noGalaxyColIdx;
     }
 
     private void duplicateRows() {
-        Set<Integer> noGalaxyRowIdx = findRowIdxToDuplicate();
+        findRowIdxToDuplicate();
         int drift = 0;
         for (int i : noGalaxyRowIdx) {
             rows.add(i + drift, new ArrayList<>(rows.get(i + drift)));
@@ -91,7 +95,7 @@ public class Universe implements IUniverse {
     }
 
     private void duplicateCols() {
-        Set<Integer> noGalaxyColIdx = findColIdxToDuplicate();
+        findColIdxToDuplicate();
         int drift = 0;
         for (int i : noGalaxyColIdx) {
             for (List<Character> row : rows) {
@@ -111,10 +115,30 @@ public class Universe implements IUniverse {
         return sumOfPaths;
     }
 
-    private int calculateDistance(int[] galaxy1, int[] galaxy2) {
+    private long calculateDistance(int[] galaxy1, int[] galaxy2) {
+        int row_min = Math.min(galaxy1[0], galaxy2[0]);
+        int row_max = Math.max(galaxy1[0], galaxy2[0]);
+        int col_min = Math.min(galaxy1[1], galaxy2[1]);
+        int col_max = Math.max(galaxy1[1], galaxy2[1]);
+
+        int countOfFactorApplications = 0;
+
+        for (Integer galaxyRowIdx : noGalaxyRowIdx) {
+            if (row_min < galaxyRowIdx && galaxyRowIdx < row_max) {
+                countOfFactorApplications++;
+            }
+        }
+        for (Integer galaxyColIdx : noGalaxyColIdx) {
+            if (col_min < galaxyColIdx && galaxyColIdx < col_max) {
+                countOfFactorApplications++;
+            }
+        }
+
         int distanceY, distanceX;
+
         distanceY = Math.abs(galaxy1[0] - galaxy2[0]);
         distanceX = Math.abs(galaxy1[1] - galaxy2[1]);
-        return distanceX + distanceY;
+
+        return (distanceX + distanceY + ((EXPANSION_FACTOR - 1) * countOfFactorApplications));
     }
 }
